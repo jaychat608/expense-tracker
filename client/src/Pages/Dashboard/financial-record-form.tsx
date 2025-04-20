@@ -1,6 +1,18 @@
+import { useState } from "react";
+
 export const FinancialRecordForm = () => {
+
+        const [description, setDescription] = useState<string>("");
+        const [amount, setAmount] = useState<string>("");
+        const [category, setCategory] = useState<string>("");
+        const [payment, setPayment] = useState<string>("");
+
+        const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+            event.preventDefault();
+        };
+
     return <div className = "form-container">
-        <form>
+        <form onSubmit = {handleSubmit}>
             <div className = "form-field">
                 <label>Description:</label>
                 <input type = "text" required className = "input" />
