@@ -1,4 +1,5 @@
 import { useState } from "react";
+import {useUser} from "@clerk/clerk-react"
 
 export const FinancialRecordForm = () => {
 
@@ -6,24 +7,38 @@ export const FinancialRecordForm = () => {
         const [amount, setAmount] = useState<string>("");
         const [category, setCategory] = useState<string>("");
         const [payment, setPayment] = useState<string>("");
+        const {user} = useUser();
 
         const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
             event.preventDefault();
+            
+            const newRecord = {
+                userId: user?.id,
+                description: description,
+                amount: parseFloat(amount),
+                category: category,
+                payment: payment
+            };
+
+            setDescription("");
+            setAmount("");
+            setCategory("");
+            setPayment("");
         };
 
     return <div className = "form-container">
         <form onSubmit = {handleSubmit}>
             <div className = "form-field">
                 <label>Description:</label>
-                <input type = "text" required className = "input" />
+                <input type = "text" required className = "input" value = {description} onChange = {(e) => setDescription(e.target.value)} />
             </div>
             <div className = "form-field">
                 <label>Amount:</label>
-                <input type = "number" required className = "input" />
+                <input type = "number" required className = "input" value = {amount} onChange = {(e) => setAmount(e.target.value)}/>
             </div>
             <div className="form-field">
                 <label>Category:</label>
-                <select required className="input">
+                <select required className="input" value = {category} onChange = {(e) => setCategory(e.target.value)}>
                     <option value="">Select a Category</option>
                     <option value="Food">Food</option>
                     <option value="Rent">Rent</option>
@@ -35,7 +50,7 @@ export const FinancialRecordForm = () => {
             </div>
             <div className="form-field">
                 <label>Payment Method:</label>
-                <select required className="input">
+                <select required className="input" value = {payment} onChange = {(e) => setPayment(e.target.value)}>
                     <option value="">Select a Payment Method</option>
                     <option value="Credit Card">Credit Card</option>
                     <option value="Cash">Cash</option>
