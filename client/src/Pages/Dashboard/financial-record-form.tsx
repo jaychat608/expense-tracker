@@ -21,6 +21,18 @@ export const FinancialRecordForm = () => {
                     <option value="Other">Other</option>
                 </select>
             </div>
+            <div className="form-field">
+                <label>Payment Method:</label>
+                <select required className="input">
+                    <option value="">Select a Payment Method</option>
+                    <option value="Credit Card">Credit Card</option>
+                    <option value="Cash">Cash</option>
+                    <option value="Bank Transfer">Bank Transfer</option>
+                </select>
+            </div>
+            <button type="submit" className="button">
+                Add Record
+            </button>
         </form>
     </div>
 }
