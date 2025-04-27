@@ -50,7 +50,9 @@ export const FinancialRecordsProvider = ({children} : {children: React.ReactNode
                 const newRecord = await response.json()
                 setRecords((prev) => [...prev, newRecord])
             }
-        } catch (err) {}
+        } catch (err) {
+            console.log("This is main problem");
+        }
     };
 
     return <FinancialRecordsContext.Provider value = {{records, addRecord}}>
